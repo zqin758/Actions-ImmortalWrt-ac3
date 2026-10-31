@@ -8,7 +8,8 @@ uci set "dhcp.@domain[-1].ip=203.107.6.88"
 sed -i 's/192.168.1.1/192.168.100.1/g' ./package/base-files/files/bin/config_generate
 sed -i 's/hostname="ImmortalWrt"/hostname="SEED_AC3"/g' ./package/base-files/files/bin/config_generate
 sed -i 's/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION="ImmortalWrt By IraXu $(date +%Y%m%d)"/g' ./package/base-files/files/etc/openwrt_release
-
+# 更改时区
+sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
 
 
 # 取消Dnsmasq缓存，由smartdns负责。不修改ttl
