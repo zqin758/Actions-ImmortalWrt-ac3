@@ -29,27 +29,4 @@ git clone https://github.com/gSpotx2f/luci-app-temp-status.git package/luci-app-
 
 #https://github.com/immortalwrt/packages/issues/1607
 #sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
-# =============================================================
-# ImmortalWrt 自定义DIY脚本 · Part1
-# 作用：向 feeds.conf.default 追加 iStore / 易有云（NAS）软件源
-# 执行时机：在 ./scripts/feeds update 之前
-# 已按 GitHub 仓库实时核对三个源的默认分支
-# =============================================================
-set -e
 
-add_feed() {
-  # 幂等追加：已存在则不重复写入，避免重复执行导致重复源
-  grep -qF "$1" feeds.conf.default || sed -i "\$a $1" feeds.conf.default
-}
-
-# 1) 易有云后端服务源（ddnsto / dockermanager / linkease / quickstart / unishare 等）
-add_feed 'src-git nas https://github.com/linkease/nas-packages.git;master'
-
-# 2) 易有云 LuCI 界面源（luci-app-ddnsto / luci-app-dockermanager / luci-app-linkease / luci-app-quickstart / luci-app-unishare）
-add_feed 'src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main'
-
-# 3) iStore 应用中心源（luci-app-store 本体所在，官方 README 推荐写法）
-add_feed 'src-git istore https://github.com/linkease/istore;main'
-
-echo "==> feeds.conf.default 中本次涉及的行："
-grep -n 'src-git \(nas\|nas_luci\|istore\)' feeds.conf.default || true
