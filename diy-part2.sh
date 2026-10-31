@@ -9,6 +9,10 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
+git clone https://github.com/gSpotx2f/luci-app-cpu-perf.git package/luci-app-cpu-perf
+git clone https://github.com/gSpotx2f/luci-app-cpu-status.git package/luci-app-cpu-status
+git clone https://github.com/gSpotx2f/luci-app-temp-status.git package/luci-app-temp-status
+
 
 # Replace Smartdns
 #rm -rfv feeds/luci/applications/luci-app-smartdns
