@@ -8,7 +8,12 @@
 # https://github.com/P3TERX/Actions-OpenWrt
 # File name: diy-part1.sh
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
-#
+
+# Modify default IP
+sed -i 's/192.168.1.1/192.168.100.1/g' ./package/base-files/files/bin/config_generate
+
+
+
 
 # 取消Dnsmasq缓存，由smartdns负责。不修改ttl
 #sed -i 's/cachesize\t8000/cachesize\t0/g' package/network/services/dnsmasq/files/dhcp.conf
